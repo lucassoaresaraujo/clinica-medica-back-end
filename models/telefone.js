@@ -24,7 +24,7 @@ module.exports = (sequelize, DataType) => {
 
     Telefone.associate = (models) => {
         Telefone.belongsTo(models.enum, {as: "Tipo"});
-        Telefone.belongsTo(models.fornecedor, {foreignKey: 'telefonableId', constraints: false, as: "fornecedor"});
+        //Telefone.belongsTo(models.fornecedor, {foreignKey: 'telefonableId', constraints: false, as: "fornecedor"});
     }
 
     Telefone.prototype.getItem = function(options) {
