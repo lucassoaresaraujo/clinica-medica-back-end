@@ -22,6 +22,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING,
             allowNull: true,
             defaultValue: null,
+            unique: true,
             validate: {
                 notEmpty: {
                     msg: "Insira um CPF válido"
@@ -36,6 +37,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING,
             allowNull: true,
             defaultValue: null,
+            unique: true,
             validate: {
                 notEmpty: {
                     msg: "Insira um documento válido"
@@ -45,6 +47,7 @@ module.exports = (sequelize, DataType) => {
         email: {
             type: DataType.STRING,
             allowNull: true,
+            unique: true,
             validate: {
                 isEmail: {
                     msg: "Insira um email válido"

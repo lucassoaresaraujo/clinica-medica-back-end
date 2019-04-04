@@ -23,7 +23,7 @@ module.exports = (sequelize, DataType) => {
     });
 
     Telefone.associate = (models) => {
-        Telefone.belongsTo(models.enum, {as: "Tipo"});
+        Telefone.belongsTo(models.enum, {as: "tipo"});
         //Telefone.belongsTo(models.fornecedor, {foreignKey: 'telefonableId', constraints: false, as: "fornecedor"});
     }
 
