@@ -1,4 +1,3 @@
-  
 module.exports = app => {
     const sequelize = app.db.sequelize;
     const Paciente = app.db.models.paciente;
@@ -9,23 +8,32 @@ module.exports = app => {
     app.route("/paciente")
         .get(async (req, res) => {
             try {                
-                const pacientes = await Paciente.findAll({});
-                res.json({pacientes: pacientes})
+                const {docs, pages, total} = await Paciente.paginate({
+                    page: req.query.page || 1,
+                    paginate: req.query.paginate || 10,
+                    order: [[req.query.orderBy || 'nome', req.query.order || 'ASC']],
+                });
+                res.json({pacientes: docs, pages: pages, total: total});
             } catch (error) {
                 res.status(412).json({msg: error.message});
             }
         })
         .post(async (req, res)=> {
+            let transaction;
             try {
                 //console.log(req.body);
+                transaction = await sequelize.transaction();
                 const paciente = await Paciente.create(req.body, {
                     include: [Telefone, {
                         association: Paciente.associations.enderecos,
                         include: [Endereco.associations.cidade]
-                    }], 
+                    }],
+                    transaction: transaction 
                 });
+                await transaction.commit();
                 res.status(201).json(paciente);
             } catch (error) {
+                await transaction.rollback();
                 res.status(412).json({msg: error.message});
             }
         });
@@ -60,7 +68,7 @@ module.exports = app => {
                 const telefones = await Promise.all(promisesTelefone);
                 await paciente.setEnderecos(enderecos, {transaction: transaction});
                 await paciente.setTelefones(telefones, {transaction: transaction});                
-                await transaction.commit();                
+                await transaction.commit();            
                 res.sendStatus(204);
             } catch (error) {                
                 await transaction.rollback();

@@ -1,3 +1,5 @@
+const sequelizePaginate = require('sequelize-paginate');
+
 module.exports = (sequelize, DataType) => {
     const Paciente = sequelize.define("paciente", {
         id: {
@@ -132,5 +134,6 @@ module.exports = (sequelize, DataType) => {
         Paciente.hasMany(models.endereco, {foreignKey: 'enderecableId', constraints: false, scope: {enderecable: 'paciente'}});
     }
 
+    sequelizePaginate.paginate(Paciente);
     return Paciente;
 };
