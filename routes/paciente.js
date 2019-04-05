@@ -9,7 +9,7 @@ module.exports = app => {
     app.route("/paciente")
         .get(async (req, res) => {
             try {                
-                const pacientes = await Paciente.findAll({include: [Endereco, Telefone]});
+                const pacientes = await Paciente.findAll({});
                 res.json({pacientes: pacientes})
             } catch (error) {
                 res.status(412).json({msg: error.message});
@@ -31,35 +31,48 @@ module.exports = app => {
         });
 
     app.route("/paciente/:id")
-        .put(async (req, res) => {
+        .get(async (req, res) => {
+            try {                
+                const paciente = await Paciente.findOne({where: req.params, include: [Telefone, {
+                    association: Paciente.associations.enderecos,
+                    include: [{association: Endereco.associations.cidade, include: Cidade.associations.estado}]
+                }]});
+                res.json({paciente: paciente})
+            } catch (error) {
+                res.status(412).json({msg: error.message});
+            }
+        })
+        .put(async (req, res) => {            
+            const paciente = await Paciente.findByPk(req.params.id);
             let transaction;
-            try {
-                const paciente = await Paciente.findByPk(req.params.id);        
-                transaction = await sequelize.transaction();                
+            try {    
+                transaction = await sequelize.transaction();
                 await paciente.update(req.body, {transaction: transaction});// verificar transação                
                 await Endereco.destroy({force: true, where: {enderecable: 'paciente', enderecableId: paciente.id}}, {transaction: transaction});
-                await Telefone.destroy({force: true, where: {telefonable: 'paciente', telefonableId: paciente.id}}, {transaction: transaction});
-                
+                await Telefone.destroy({force: true, where: {telefonable: 'paciente', telefonableId: paciente.id}}, {transaction: transaction});                
                 const promisesEndereco = req.body.enderecos.map(endereco => {
                     return Endereco.create(endereco, {transaction: transaction});
                 });
-
                 const promisesTelefone = req.body.telefones.map(telefone => {
                     return Telefone.create(telefone, {transaction: transaction})
-                });
-                
+                });                
                 const enderecos = await Promise.all(promisesEndereco);
                 const telefones = await Promise.all(promisesTelefone);
-
                 await paciente.setEnderecos(enderecos, {transaction: transaction});
-                await paciente.setTelefones(telefones, {transaction: transaction});
-                
-                await transaction.commit();
+                await paciente.setTelefones(telefones, {transaction: transaction});                
+                await transaction.commit();                
                 res.sendStatus(204);
-            } catch (error) {
-                console.log(error);
+            } catch (error) {                
                 await transaction.rollback();
                 res.status(412).json({msg: error.message});
             }
         })
+        .delete(async (req, res) => {
+            try {
+                await Paciente.destroy({where: req.params});
+                res.sendStatus(204);
+            } catch (error) {
+                res.status(412).json({msg: error.message});
+            }
+        });
 }
