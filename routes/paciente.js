@@ -20,8 +20,7 @@ module.exports = app => {
         })
         .post(async (req, res)=> {
             let transaction;
-            try {
-                //console.log(req.body);
+            try {                
                 transaction = await sequelize.transaction();
                 const paciente = await Paciente.create(req.body, {
                     include: [Telefone, {
