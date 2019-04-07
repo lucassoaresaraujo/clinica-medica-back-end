@@ -23,17 +23,14 @@ module.exports = app => {
             try {                
                 transaction = await sequelize.transaction();
                 const profissional = await Profissional.create(req.body, {
-                    include: [Telefone, {
-                        association: Profissional.associations.enderecos,
-                        include: [Endereco.associations.cidade]
-                    }],
+                    include: [Telefone, Endereco],
                     transaction: transaction 
                 });
                 await transaction.commit();
                 res.status(201).json(profissional);
             } catch (error) {
                 await transaction.rollback();
-                res.status(412).json({msg: error.message});
+                res.status(412).json({errors: error.errors});
             }
         });
 

@@ -14,6 +14,9 @@ module.exports = (sequelize, DataType) => {
                 notEmpty: {
                     msg: "Insira um nome válido"
                 },
+                notNull: {
+                    msg: "O nome deve ser informado"
+                },
                 len: {
                     args: [2, 255],
                     msg: "O nome deve ter entre 2 e 255 caracteres"
@@ -26,6 +29,9 @@ module.exports = (sequelize, DataType) => {
             validate: {
                 notEmpty: {
                     msg: "Insira um nome abreviado válido"
+                },
+                notNull: {
+                    msg: "O nome abreviado deve ser informado"
                 },
                 len: {
                     args: [2, 35],
