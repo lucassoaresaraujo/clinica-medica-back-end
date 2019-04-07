@@ -49,7 +49,7 @@ module.exports = (sequelize, DataType) => {
             }
         },
         documentoIdentidade: {
-            type: DataType.STRING,
+            type: DataType.STRING(25),
             allowNull: true,
             defaultValue: null,
             unique: true,
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataType) => {
             }
         },
         orgaoEmissor: {
-            type: DataType.STRING,
+            type: DataType.STRING(25),
             allowNull: true,
             defaultValue: null,
             validate: {
@@ -136,23 +136,30 @@ module.exports = (sequelize, DataType) => {
                 }
             }         
         },
-        profissao: {
-            type: DataType.STRING,
+        registroConselho: {
+            type: DataType.STRING(15),
             allowNull: true,
-            defaultValue: null,
+            defaultValue: null,            
+            validate: {
+                notEmpty: {
+                    msg: "Insira um documento de identidade válido"
+                }
+            }
+        },
+        possuiAgenda: {
+            type: DataType.BOOLEAN
         },
         observacoes: {
             type: DataType.TEXT,
             allowNull: true,
-            
         }
     });
 
     Profissional.associate = (models) => {
         Profissional.belongsTo(models.enum, {as: "Genero"});
-        Profissional.belongsTo(models.enum, {as: "Escolaridade"});
+        Profissional.belongsTo(models.enum, {as: "Conselho"});
         Profissional.belongsTo(models.enum, {as: "TipoSanguineo"});
-        Profissional.belongsTo(models.enum, {as: "SituacaoFamiliar"});
+        Profissional.belongsTo(models.profissao);
         Profissional.hasMany(models.telefone, {foreignKey: 'telefonableId', constraints: false, scope: {telefonable: 'profissional'}});
         Profissional.hasMany(models.endereco, {foreignKey: 'enderecableId', constraints: false, scope: {enderecable: 'profissional'}});
     }
