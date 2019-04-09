@@ -1,4 +1,4 @@
-module.exports = app => {    
+module.exports = async app => {
     const Fornecedor = app.db.models.fornecedor;
     const Enum = app.db.models.enum;
     const Telefone = app.db.models.telefone;
@@ -98,5 +98,156 @@ module.exports = app => {
     // .then (result => {
     //     console.log("Concluido");
     // });
+
+    const seederArray = [];
+
+    // const situacoesFamiliar = [
+    //     {
+    //         nome: 'Convive com companheira(o) e filho(s)',
+    //         tipo: 'situacao_familiar'
+    //     },
+    //     {
+    //         nome: 'Convive com companheira(o) com laços conjungais e sem filho(s)',
+    //         tipo: 'situacao_familiar'
+    //     },
+    //     {
+    //         nome: 'Convive com companheira(o) com filho(s) e/ou outro(s) familiar(es)',
+    //         tipo: 'situacao_familiar'
+    //     },
+    //     {
+    //         nome: 'Convive com familiar(es) sem companheira(o)',
+    //         tipo: 'situacao_familiar'
+    //     },
+    //     {
+    //         nome: 'Convive com outra(s) pessoa(s) sem laços consanguineos e/ou laços conjungais',
+    //         tipo: 'situacao_familiar'
+    //     },
+    //     {
+    //         nome: 'Vive só',
+    //         tipo: 'situacao_familiar'
+    //     }
+    // ];
+    // const criarSituacaoFamiliar = Enum.bulkCreate(situacoesFamiliar);
+    // seederArray.push(criarSituacaoFamiliar);
+
+
+    // const generos = [
+    //     {
+    //         nome: 'Masculino',
+    //         tipo: 'genero_sexual'
+    //     },
+    //     {
+    //         nome: 'Feminino',
+    //         tipo: 'genero_sexual'
+    //     }
+    // ];
+    // const criarGeneros = Enum.bulkCreate(generos);
+    // seederArray.push(criarGeneros);
+
+    // const tiposSanguineos = [
+    //     {
+    //         nome: 'A+',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'A-',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'B+',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'B-',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'AB+',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'AB-',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'O+',
+    //         tipo: 'tipo_sanguineo',
+    //     },
+    //     {
+    //         nome: 'O-',
+    //         tipo: 'tipo_sanguineo',
+    //     }
+    // ];
+    // const criarTiposSanguineos = Enum.bulkCreate(tiposSanguineos);
+    // seederArray.push(criarTiposSanguineos);
+
+    // const conselhos = [
+    //     {
+    //         nome: 'CRAS',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRBM',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CREFITO',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'COREN',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CREF',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRF',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRFA',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRM',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRN',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRO',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRP',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRT',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRNT',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRTR',
+    //         tipo: 'conselho_saude',
+    //     },
+    //     {
+    //         nome: 'CRMV',
+    //         tipo: 'conselho_saude',
+    //     }
+    // ];
+
+    // const criarConselhos = Enum.bulkCreate(conselhos);
+    // seederArray.push(criarConselhos)
+
+    // await Promise.all(seederArray);
+    
         
 }

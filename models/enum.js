@@ -5,25 +5,25 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        nome: {
             type: DataType.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true                
             }
         },
-        description: {
+        descricao: {
             type: DataType.STRING,
             allowNull: true,
             validate: {
                 len: [3,255]
             }
         },
-        secondaryId: {
+        codigoSecundario: {
             type: DataType.STRING,
             allowNull: true            
         },
-        type: {
+        tipo: {
             type: DataType.STRING,
             allowNull: false
         }
