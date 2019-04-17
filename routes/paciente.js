@@ -1,5 +1,6 @@
 module.exports = app => {
     const sequelize = app.db.sequelize;
+    const Op = app.db.Sequelize.Op;
     const Paciente = app.db.models.paciente;
     const Telefone = app.db.models.telefone;
     const Endereco = app.db.models.endereco;
@@ -8,10 +9,12 @@ module.exports = app => {
     app.route("/paciente")
         .get(async (req, res) => {
             try {                
+                const nome = req.query.nome || '';
                 const {docs, pages, total} = await Paciente.paginate({
                     page: req.query.page || 1,
                     paginate: req.query.paginate || 10,
                     order: [[req.query.orderBy || 'nome', req.query.order || 'ASC']],
+                    where: {nome: {[Op.iLike]: `${nome}%`}}
                 });
                 res.json({pacientes: docs, pages: pages, total: total});
             } catch (error) {
