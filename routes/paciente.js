@@ -9,12 +9,19 @@ module.exports = app => {
     app.route("/paciente")
         .get(async (req, res) => {
             try {                
-                const nome = req.query.nome || '';
+                const filtro = req.query.filtro || '';
                 const {docs, pages, total} = await Paciente.paginate({
                     page: req.query.page || 1,
                     paginate: req.query.paginate || 10,
-                    order: [[req.query.orderBy || 'nome', req.query.order || 'ASC']],
-                    where: {nome: {[Op.iLike]: `${nome}%`}}
+                    order: [
+                        [req.query.orderBy || 'nome', req.query.order || 'ASC']
+                    ],
+                    where: {
+                        [Op.or]: [
+                            {nome: {[Op.iLike]: `${filtro}%`}},
+                            {cpf: {[Op.eq]: filtro}}
+                        ]
+                    }
                 });
                 res.json({pacientes: docs, pages: pages, total: total});
             } catch (error) {
