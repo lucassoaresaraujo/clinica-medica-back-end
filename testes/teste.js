@@ -48,7 +48,7 @@ module.exports = async app => {
     // }
 
 
-    // const enuns = Enum.findAll({where: {type: 'telefone.tipo'}});
+    // const enuns = Enum.findAll({where: {tipo: 'telefone.tipo'}});
     // const fornecedor = Fornecedor.findAll({where: {id: 69}});
 
     // Promise.all([enuns, fornecedor])
@@ -147,35 +147,35 @@ module.exports = async app => {
     // const tiposSanguineos = [
     //     {
     //         nome: 'A+',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'A-',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'B+',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'B-',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'AB+',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'AB-',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'O+',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     },
     //     {
     //         nome: 'O-',
-    //         tipo: 'tipo_sanguineo',
+    //         tipo: tipo_sanguineo',
     //     }
     // ];
     // const criarTiposSanguineos = Enum.bulkCreate(tiposSanguineos);
@@ -246,6 +246,59 @@ module.exports = async app => {
 
     // const criarConselhos = Enum.bulkCreate(conselhos);
     // seederArray.push(criarConselhos)
+
+
+    // CRIAR ESCOLARIDADES
+
+    // const escolaridades = [
+    //     {
+    //         nome: 'Não sabe ler/escrever',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Alfabetizado',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Ensino fundamental incompleto',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Ensino fundamental completo',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Ensino médio incompleto',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Ensino médio completo',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Superior incompleto',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Superior completo',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Especialização/Residência',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Mestrado',
+    //         tipo: 'escolaridade',            
+    //     },
+    //     {
+    //         nome: 'Doutorado',
+    //         tipo: 'escolaridade',            
+    //     }
+    // ];
+
+    // const criarEscolaridades = Enum.bulkCreate(escolaridades);
+    // seederArray.push(criarEscolaridades)
 
     // await Promise.all(seederArray);
     
